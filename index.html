@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Leitor de Gabarito - Simulado</title>
+    <title>Leitor de Gabarito - Simulado (A-D) | Preciso</title>
     <style>
         * {
             margin: 0;
@@ -313,13 +313,13 @@
 <body>
 <div class="container no-print">
     <h1>📝 Leitor Inteligente de Gabarito</h1>
-    <div class="subtitle">Sistema de Correção Automática para Simulados</div>
+    <div class="subtitle">Sistema de Correção Automática para Simulados (Alternativas A, B, C, D)</div>
 
     <div class="two-columns">
         <div class="left-panel">
             <div class="card">
                 <h3>📌 Gabarito Oficial (Professor)</h3>
-                <p style="font-size: clamp(11px, 3vw, 13px); color: #666;">Defina as respostas corretas para cada questão (1 a 10)</p>
+                <p style="font-size: clamp(11px, 3vw, 13px); color: #666;">Defina as respostas corretas para cada questão (1 a 10) – opções A, B, C, D</p>
                 <div id="gabaritoContainer" class="gabarito-oficial"></div>
                 <button id="salvarGabaritoBtn" class="btn btn-success">💾 Salvar Gabarito Oficial</button>
             </div>
@@ -328,18 +328,18 @@
                 <h3>🖨️ Material para Alunos</h3>
                 <button id="imprimirCartaoBtn" class="btn btn-print">📄 IMPRIMIR CARTÃO RESPOSTA</button>
                 <p style="font-size: 10px; color: #666; margin-top: 8px; text-align: center;">
-                    Clique para gerar e imprimir o cartão-resposta
+                    Clique para gerar e imprimir o cartão-resposta (A a D)
                 </p>
             </div>
 
             <div class="card">
                 <h3>📖 Instruções</h3>
                 <ol class="instrucoes">
-                    <li>Preencha o gabarito oficial</li>
+                    <li>Preencha o gabarito oficial (A, B, C ou D)</li>
                     <li>Imprima os cartões para os alunos</li>
                     <li>Clique em "📷 ATIVAR CÂMERA"</li>
                     <li>PERMITA o acesso à câmera quando solicitado</li>
-                    <li>Centralize os marcadores na tela</li>
+                    <li>Centralize o cartão na tela (preencha os círculos completamente)</li>
                     <li>Clique em "📸 TIRAR FOTO E ANALISAR"</li>
                     <li>Use "🔄 Nova Leitura" para outro aluno</li>
                     <li>Clique em "⏹️ DESLIGAR CÂMERA" para liberar o dispositivo</li>
@@ -380,44 +380,48 @@
     </div>
 </div>
 
-<!-- ÁREA PARA IMPRESSÃO -->
-<div id="cartaoResposta" style="display: none; padding: 15px; font-family: Arial, sans-serif;">
-    <div style="max-width: 800px; margin: 0 auto;">
-        <div style="text-align: center; margin-bottom: 15px;">
-            <h1 style="color: #333; font-size: 22px;">📝 CARTÃO RESPOSTA</h1>
-            <h3 style="color: #666; font-size: 16px;">SIMULADO</h3>
-            <p style="font-size: 11px;"><strong>Nome:</strong> _________________________________</p>
-            <p style="font-size: 11px;"><strong>Data:</strong> ___/___/______ &nbsp;&nbsp; <strong>Turma:</strong> _________</p>
+<!-- ÁREA PARA IMPRESSÃO (CARTÃO RESPOSTA COM 4 COLUNAS) - FONTES AUMENTADAS -->
+<div id="cartaoResposta" style="display: none; padding: 20px; font-family: Arial, sans-serif;">
+    <div style="max-width: 900px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 25px;">
+            <h1 style="color: #333; font-size: 28px;">📝 CARTÃO RESPOSTA</h1>
+            <h3 style="color: #666; font-size: 20px;">SIMULADO (A - D)</h3>
+            
+            <!-- Campos com fontes maiores e mais espaçamento -->
+            <div style="margin-top: 20px; font-size: 16px; line-height: 2.2;">
+                <div><strong>NOME:</strong> <span style="border-bottom: 1px solid #000; display: inline-block; width: 60%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+                <div style="margin-top: 10px;"><strong>DATA:</strong> <span style="border-bottom: 1px solid #000; display: inline-block; width: 25%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> ______/______/______</div>
+                <div style="margin-top: 10px;"><strong>TURMA:</strong> <span style="border-bottom: 1px solid #000; display: inline-block; width: 40%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+            </div>
         </div>
 
-        <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 8px; margin-bottom: 12px; border-radius: 8px; font-size: 10px;">
-            <h3 style="color: #856404; margin-top: 0; font-size: 12px;">⚠️ ATENÇÃO! INSTRUÇÕES</h3>
-            <ul style="color: #856404; line-height: 1.3; margin: 0; padding-left: 18px;">
+        <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; margin-bottom: 20px; border-radius: 8px; font-size: 13px;">
+            <h3 style="color: #856404; margin-top: 0; font-size: 16px;">⚠️ ATENÇÃO! INSTRUÇÕES</h3>
+            <ul style="color: #856404; line-height: 1.5; margin: 0; padding-left: 20px;">
                 <li><strong>✅ CORRETA:</strong> Preencha COMPLETAMENTE o círculo ●</li>
                 <li><strong>❌ INCORRETA:</strong> NÃO faça "X", não rasure</li>
                 <li><strong>🔘 Use caneta preta ou azul escura</strong></li>
-                <li><strong>🎯 Exemplo: ● certo | ☐ ⊗ ◑ errado</strong></li>
+                <li><strong>🎯 Exemplo: ● certo | ☐ ⊗ errado</strong></li>
                 <li><strong>⚠️ Evite rasuras. Peça novo cartão se errar</strong></li>
-                <li><strong>📌 Uma alternativa por questão</strong></li>
+                <li><strong>📌 Uma alternativa por questão (A, B, C ou D)</strong></li>
             </ul>
         </div>
 
         <div class="table-responsive">
-            <table style="width: 100%; border-collapse: collapse; border: 2px solid #333; font-size: 11px;">
+            <table style="width: 100%; border-collapse: collapse; border: 2px solid #333; font-size: 14px;">
                 <thead>
                     <tr style="background: #764ba2;">
-                        <th style="color: white; padding: 6px;">Q</th>
-                        <th style="color: white; padding: 6px;">A</th>
-                        <th style="color: white; padding: 6px;">B</th>
-                        <th style="color: white; padding: 6px;">C</th>
-                        <th style="color: white; padding: 6px;">D</th>
-                        <th style="color: white; padding: 6px;">E</th>
+                        <th style="color: white; padding: 10px;">Q</th>
+                        <th style="color: white; padding: 10px;">A</th>
+                        <th style="color: white; padding: 10px;">B</th>
+                        <th style="color: white; padding: 10px;">C</th>
+                        <th style="color: white; padding: 10px;">D</th>
                     </tr>
                 </thead>
                 <tbody id="tabelaCartaoResposta"></tbody>
             </table>
         </div>
-        <div style="margin-top: 15px; text-align: center; font-size: 9px; color: #999;">
+        <div style="margin-top: 20px; text-align: center; font-size: 11px; color: #999;">
             <p>Preencha corretamente para garantir a leitura óptica</p>
         </div>
     </div>
@@ -426,6 +430,7 @@
 <script>
     // CONFIGURAÇÕES
     const QUESTOES = 10;
+    const ALTERNATIVAS = ['A', 'B', 'C', 'D'];
     let gabaritoOficial = {};
     let stream = null;
     let historicoCorrecoes = [];
@@ -451,7 +456,7 @@
         }
     }
 
-    // Gerar formulário
+    // Gerar formulário do gabarito (apenas A-D)
     function gerarFormularioGabarito() {
         const container = document.getElementById('gabaritoContainer');
         container.innerHTML = '';
@@ -467,7 +472,6 @@
                     <option value="B" ${gabaritoOficial[i] === 'B' ? 'selected' : ''}>B</option>
                     <option value="C" ${gabaritoOficial[i] === 'C' ? 'selected' : ''}>C</option>
                     <option value="D" ${gabaritoOficial[i] === 'D' ? 'selected' : ''}>D</option>
-                    <option value="E" ${gabaritoOficial[i] === 'E' ? 'selected' : ''}>E</option>
                 </select>
             `;
             container.appendChild(div);
@@ -486,30 +490,26 @@
         alert('✅ Gabarito salvo com sucesso!');
     });
 
-    // Gerar cartão resposta
+    // Gerar cartão resposta (4 colunas)
     function gerarCartaoResposta() {
         const tbody = document.getElementById('tabelaCartaoResposta');
         tbody.innerHTML = '';
-        
         for (let i = 1; i <= QUESTOES; i++) {
             const tr = document.createElement('tr');
             tr.style.borderBottom = '1px solid #ddd';
             tr.innerHTML = `
-                <td style="text-align: center; font-weight: bold; padding: 6px; border:1px solid #ddd;">${i}</td>
-                <td style="text-align: center; padding: 4px; border:1px solid #ddd;">
-                    <div style="width: 22px; height: 22px; border: 2px solid #333; border-radius: 50%; margin: 0 auto;"></div>
+                <td style="text-align: center; font-weight: bold; padding: 12px; border:1px solid #ddd;">${i}</td>
+                <td style="text-align: center; padding: 8px; border:1px solid #ddd;">
+                    <div style="width: 28px; height: 28px; border: 2px solid #333; border-radius: 50%; margin: 0 auto;"></div>
                 </td>
-                <td style="text-align: center; padding: 4px; border:1px solid #ddd;">
-                    <div style="width: 22px; height: 22px; border: 2px solid #333; border-radius: 50%; margin: 0 auto;"></div>
+                <td style="text-align: center; padding: 8px; border:1px solid #ddd;">
+                    <div style="width: 28px; height: 28px; border: 2px solid #333; border-radius: 50%; margin: 0 auto;"></div>
                 </td>
-                <td style="text-align: center; padding: 4px; border:1px solid #ddd;">
-                    <div style="width: 22px; height: 22px; border: 2px solid #333; border-radius: 50%; margin: 0 auto;"></div>
+                <td style="text-align: center; padding: 8px; border:1px solid #ddd;">
+                    <div style="width: 28px; height: 28px; border: 2px solid #333; border-radius: 50%; margin: 0 auto;"></div>
                 </td>
-                <td style="text-align: center; padding: 4px; border:1px solid #ddd;">
-                    <div style="width: 22px; height: 22px; border: 2px solid #333; border-radius: 50%; margin: 0 auto;"></div>
-                </td>
-                <td style="text-align: center; padding: 4px; border:1px solid #ddd;">
-                    <div style="width: 22px; height: 22px; border: 2px solid #333; border-radius: 50%; margin: 0 auto;"></div>
+                <td style="text-align: center; padding: 8px; border:1px solid #ddd;">
+                    <div style="width: 28px; height: 28px; border: 2px solid #333; border-radius: 50%; margin: 0 auto;"></div>
                 </td>
             `;
             tbody.appendChild(tr);
@@ -528,12 +528,10 @@
         }, 100);
     });
 
-    // FUNÇÃO PARA DESLIGAR A CÂMERA (LIBERAR O DISPOSITIVO)
+    // FUNÇÃO PARA DESLIGAR A CÂMERA
     function desligarCamera() {
         if (stream) {
-            stream.getTracks().forEach(track => {
-                track.stop();
-            });
+            stream.getTracks().forEach(track => track.stop());
             stream = null;
         }
         video.srcObject = null;
@@ -545,106 +543,92 @@
         ativarCameraBtn.disabled = false;
         statusCamera.innerHTML = '⚪ Câmera desligada';
         statusCamera.style.background = '#e9ecef';
-        
-        // Limpar qualquer preview
         previewImage.src = '';
-        
-        console.log('Câmera desligada e dispositivo liberado');
     }
 
-    // FUNÇÕES DA CÂMERA
-    async function iniciarCamera() {
-        try {
-            // Primeiro, desligar qualquer câmera ativa
-            desligarCamera();
-            
-            statusCamera.innerHTML = '🟡 Solicitando permissão da câmera...';
-            statusCamera.style.background = '#fff3cd';
-            
-            stream = await navigator.mediaDevices.getUserMedia({ 
-                video: { 
-                    facingMode: 'environment',
-                    width: { ideal: 1280 },
-                    height: { ideal: 720 }
-                } 
-            });
-            
-            video.srcObject = stream;
-            video.style.display = 'block';
-            previewImage.style.display = 'none';
-            cameraPlaceholder.style.display = 'none';
-            
-            await video.play();
-            
-            statusCamera.innerHTML = '✅ Câmera ativada! Aponte para o cartão';
-            statusCamera.style.background = '#d4edda';
-            capturarBtn.disabled = false;
-            desligarCameraBtn.disabled = false;
-            ativarCameraBtn.disabled = true;
-            
-        } catch (err) {
-            console.error('Erro na câmera:', err);
-            statusCamera.innerHTML = '❌ Erro ao acessar a câmera';
-            statusCamera.style.background = '#f8d7da';
-            capturarBtn.disabled = true;
-            desligarCameraBtn.disabled = true;
-            ativarCameraBtn.disabled = false;
-            
-            let erroMsg = '';
-            if (err.name === 'NotAllowedError') {
-                erroMsg = 'Permissão negada! Clique no ícone de câmera na barra de endereço e permita o acesso.';
-            } else if (err.name === 'NotFoundError') {
-                erroMsg = 'Nenhuma câmera encontrada neste dispositivo.';
-            } else if (err.name === 'NotReadableError') {
-                erroMsg = 'Câmera está sendo usada por outro aplicativo.';
-            } else {
-                erroMsg = err.message;
-            }
-            
-            const erroDiv = document.createElement('div');
-            erroDiv.className = 'erro-camera';
-            erroDiv.innerHTML = `⚠️ ${erroMsg}<br><br>
-                <strong>DICA:</strong> Se estiver no Google Sites, tente:<br>
-                1. Abrir o link em uma nova guia<br>
-                2. Usar o navegador Chrome ou Edge<br>
-                3. Clicar no cadeado 🔒 na barra de endereço e permitir câmera`;
-            
-            const cameraArea = document.getElementById('cameraArea');
-            const oldErro = cameraArea.querySelector('.erro-camera');
-            if (oldErro) oldErro.remove();
-            cameraArea.appendChild(erroDiv);
-            
-            setTimeout(() => {
-                const err = cameraArea.querySelector('.erro-camera');
-                if (err) err.remove();
-            }, 8000);
+    // FUNÇÃO MELHORADA DE ANÁLISE COM PRÉ-PROCESSAMENTO
+    function analisarGabaritoAluno(imageData, width, height) {
+        // Converter para escala de cinza e aplicar threshold (binarização)
+        const gray = new Uint8Array(width * height);
+        for (let i = 0; i < width * height; i++) {
+            const r = imageData.data[i*4];
+            const g = imageData.data[i*4+1];
+            const b = imageData.data[i*4+2];
+            // luminância
+            const lum = 0.299 * r + 0.587 * g + 0.114 * b;
+            gray[i] = lum;
         }
+        
+        // Calcular threshold adaptativo (média global + ajuste)
+        let sum = 0;
+        for (let i = 0; i < gray.length; i++) sum += gray[i];
+        const mediaGlobal = sum / gray.length;
+        const threshold = mediaGlobal * 0.7; // pixels mais escuros que 70% da média são considerados preenchidos
+        
+        // Criar imagem binária (0 = claro, 1 = escuro)
+        const binary = new Uint8Array(width * height);
+        for (let i = 0; i < gray.length; i++) {
+            binary[i] = gray[i] < threshold ? 1 : 0;
+        }
+        
+        // Parâmetros de posição (ajustados para 4 colunas)
+        const startX = width * 0.22;
+        const startY = height * 0.22;
+        const stepX = width * 0.14;
+        const stepY = height * 0.065;
+        const raio = 18; // raio maior para capturar melhor o preenchimento
+        
+        const questoesLidas = {};
+        
+        for (let q = 1; q <= QUESTOES; q++) {
+            let melhorAlt = 'A';
+            let maiorDensidade = 0;
+            
+            for (let altIdx = 0; altIdx < ALTERNATIVAS.length; altIdx++) {
+                const cx = startX + (altIdx * stepX);
+                const cy = startY + ((q-1) * stepY);
+                
+                let pixelsEscuros = 0;
+                let totalPixels = 0;
+                
+                for (let dy = -raio; dy <= raio; dy++) {
+                    for (let dx = -raio; dx <= raio; dx++) {
+                        const x = Math.floor(cx + dx);
+                        const y = Math.floor(cy + dy);
+                        if (x >= 0 && x < width && y >= 0 && y < height) {
+                            totalPixels++;
+                            if (binary[y * width + x] === 1) {
+                                pixelsEscuros++;
+                            }
+                        }
+                    }
+                }
+                const densidade = (pixelsEscuros / totalPixels) * 100;
+                if (densidade > maiorDensidade) {
+                    maiorDensidade = densidade;
+                    melhorAlt = ALTERNATIVAS[altIdx];
+                }
+            }
+            // Critério: se a maior densidade for maior que 25% (ajustável), considera preenchido
+            questoesLidas[q] = maiorDensidade > 25 ? melhorAlt : null;
+        }
+        return questoesLidas;
     }
-
-    // FUNÇÃO PARA TIRAR FOTO (CAPTURAR)
+    
+    // CAPTURAR E ANALISAR
     async function tirarFotoEAnalisar() {
         if (!stream || !video.videoWidth || video.style.display === 'none') {
             alert('⚠️ Câmera não está ativa. Clique em "ATIVAR CÂMERA" primeiro.');
             return;
         }
         
-        statusCamera.innerHTML = '🟡 Capturando imagem...';
+        statusCamera.innerHTML = '🟡 Capturando imagem e processando...';
         statusCamera.style.background = '#fff3cd';
         
-        // Configurar canvas com o tamanho do vídeo
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
-        
-        // Desenhar o frame atual do vídeo no canvas
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
         
-        // Mostrar preview da foto tirada
-        const fotoDataURL = canvas.toDataURL('image/jpeg', 0.9);
-        previewImage.src = fotoDataURL;
-        previewImage.style.display = 'block';
-        video.style.display = 'none';
-        
-        // Analisar a imagem capturada
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         const respostasAluno = analisarGabaritoAluno(imageData, canvas.width, canvas.height);
         
@@ -667,70 +651,13 @@
         const nomeAluno = prompt('Nome do aluno:', `Aluno ${historicoCorrecoes.length + 1}`);
         adicionarAoHistorico(nomeAluno || `Aluno ${historicoCorrecoes.length + 1}`, nota, acertos, detalhes);
         
-        statusCamera.innerHTML = '✅ Foto capturada e analisada!';
+        statusCamera.innerHTML = '✅ Leitura concluída!';
         statusCamera.style.background = '#d4edda';
         
         alert(`📊 RESULTADO:\nNota: ${nota}\nAcertos: ${acertos}/${QUESTOES}\n\nSalvo no histórico!`);
-        
-        // Voltar a mostrar o vídeo após 2 segundos
-        setTimeout(() => {
-            if (stream && video.style.display === 'none') {
-                video.style.display = 'block';
-                previewImage.style.display = 'none';
-                statusCamera.innerHTML = '✅ Pronto para nova captura!';
-            }
-        }, 2000);
     }
     
-    // Analisar marcadores (mesma lógica original)
-    function analisarGabaritoAluno(imageData, width, height) {
-        const questoesLidas = {};
-        const startX = width * 0.2;
-        const startY = height * 0.2;
-        const stepX = width * 0.12;
-        const stepY = height * 0.07;
-        const alternativas = ['A', 'B', 'C', 'D', 'E'];
-        
-        for (let q = 1; q <= QUESTOES; q++) {
-            let melhorAlt = 'A';
-            let maiorEscuridao = 0;
-            
-            for (let altIdx = 0; altIdx < alternativas.length; altIdx++) {
-                const cx = startX + (altIdx * stepX);
-                const cy = startY + ((q-1) * stepY);
-                
-                let totalEscuro = 0;
-                let amostras = 0;
-                const raio = 12;
-                
-                for (let dy = -raio; dy <= raio; dy++) {
-                    for (let dx = -raio; dx <= raio; dx++) {
-                        const x = Math.floor(cx + dx);
-                        const y = Math.floor(cy + dy);
-                        if (x >= 0 && x < width && y >= 0 && y < height) {
-                            const idx = (y * width + x) * 4;
-                            const r = imageData.data[idx];
-                            const g = imageData.data[idx+1];
-                            const b = imageData.data[idx+2];
-                            const brilho = (r + g + b) / 3;
-                            const escuridao = 255 - brilho;
-                            totalEscuro += escuridao;
-                            amostras++;
-                        }
-                    }
-                }
-                const mediaEscuridao = totalEscuro / amostras;
-                if (mediaEscuridao > maiorEscuridao) {
-                    maiorEscuridao = mediaEscuridao;
-                    melhorAlt = alternativas[altIdx];
-                }
-            }
-            questoesLidas[q] = maiorEscuridao > 30 ? melhorAlt : null;
-        }
-        return questoesLidas;
-    }
-    
-    // Histórico
+    // Histórico (mesmo de antes)
     function adicionarAoHistorico(aluno, nota, acertos, detalhes) {
         const registro = {
             id: Date.now(),
@@ -747,12 +674,10 @@
 
     function atualizarHistoricoUI() {
         const historicoLista = document.getElementById('historicoLista');
-        
         if (historicoCorrecoes.length === 0) {
             historicoLista.innerHTML = '<p style="text-align: center; color: #999; padding: 20px;">Nenhuma correção realizada</p>';
             return;
         }
-        
         historicoLista.innerHTML = '';
         [...historicoCorrecoes].reverse().forEach(reg => {
             const div = document.createElement('div');
@@ -796,14 +721,40 @@
         if (!stream) {
             alert('⚠️ Ative a câmera primeiro clicando em "ATIVAR CÂMERA"');
         } else {
-            // Garantir que o vídeo está visível
             if (video.style.display === 'none') {
                 video.style.display = 'block';
                 previewImage.style.display = 'none';
             }
-            statusCamera.innerHTML = '✅ Pronto para nova leitura! Centralize o próximo cartão e clique em "Tirar Foto"';
-            statusCamera.style.background = '#d4edda';
+            statusCamera.innerHTML = '✅ Pronto para nova leitura! Centralize o próximo cartão.';
             alert('🔄 Pronto para nova leitura! Centralize o próximo cartão.');
+        }
+    }
+    
+    // Inicializar câmera
+    async function iniciarCamera() {
+        try {
+            desligarCamera();
+            statusCamera.innerHTML = '🟡 Solicitando permissão...';
+            statusCamera.style.background = '#fff3cd';
+            stream = await navigator.mediaDevices.getUserMedia({ 
+                video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } } 
+            });
+            video.srcObject = stream;
+            video.style.display = 'block';
+            cameraPlaceholder.style.display = 'none';
+            await video.play();
+            statusCamera.innerHTML = '✅ Câmera ativada! Aponte para o cartão.';
+            statusCamera.style.background = '#d4edda';
+            capturarBtn.disabled = false;
+            desligarCameraBtn.disabled = false;
+            ativarCameraBtn.disabled = true;
+        } catch (err) {
+            statusCamera.innerHTML = '❌ Erro na câmera';
+            statusCamera.style.background = '#f8d7da';
+            capturarBtn.disabled = true;
+            desligarCameraBtn.disabled = true;
+            ativarCameraBtn.disabled = false;
+            alert('Erro ao acessar câmera: ' + err.message);
         }
     }
     
@@ -814,7 +765,7 @@
     document.getElementById('novaLeituraBtn').addEventListener('click', fazerNovaLeitura);
     document.getElementById('limparHistoricoBtn').addEventListener('click', limparHistorico);
     
-    // Inicializar
+    // Inicializar UI
     gerarFormularioGabarito();
     carregarGabarito();
 </script>
