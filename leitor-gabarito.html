@@ -1,3 +1,4 @@
+```html name=leitor-gabarito.html url=https://github.com/RgMat/leitor-gabarito/blob/main/leitor-gabarito.html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -399,7 +400,7 @@
             <div style="margin-top: 20px; font-size: 16px; line-height: 2.2;">
                 <div><strong>NOME:</strong> <span style="border-bottom: 1px solid #000; display: inline-block; width: 60%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
                 <div style="margin-top: 10px;"><strong>DATA:</strong> ___ / ___ / _______</div>
-                <div style="margin-top: 10px;"><strong>TURMA:</strong> <span style="border-bottom: 1px solid #000; display: inline-block; width: 40%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+                <div style="margin-top: 10px;"><strong>TURMA:</strong> <span style="border-bottom: 1px solid #000; display: inline-block; width: 40%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
             </div>
         </div>
 
@@ -554,9 +555,9 @@
         previewImage.src = '';
     }
 
-    // Análise avançada do gabarito
+    // ⭐ FUNÇÃO CORRIGIDA - Análise avançada do gabarito com Otsu Threshold
     function analisarGabaritoAluno(imageData, width, height) {
-        // Converter para escala de cinza
+        // Converter para escala de cinza com melhor luminância
         const gray = new Uint8Array(width * height);
         for (let i = 0; i < width * height; i++) {
             const r = imageData.data[i*4];
@@ -566,24 +567,47 @@
             gray[i] = lum;
         }
         
-        // Threshold adaptativo
-        let sum = 0;
-        for (let i = 0; i < gray.length; i++) sum += gray[i];
-        const mediaGlobal = sum / gray.length;
-        const threshold = mediaGlobal * 0.65;
+        // Calcular threshold adaptativo baseado em histograma (Método de Otsu)
+        const histogram = new Uint32Array(256);
+        for (let i = 0; i < gray.length; i++) {
+            histogram[gray[i]]++;
+        }
         
-        // Binarização
+        let sum = 0, sumB = 0, countB = 0;
+        for (let i = 0; i < 256; i++) {
+            sum += i * histogram[i];
+        }
+        
+        let maxVar = 0, threshold = 0;
+        for (let t = 0; t < 256; t++) {
+            countB += histogram[t];
+            if (countB === 0) continue;
+            const countF = width * height - countB;
+            if (countF === 0) break;
+            
+            sumB += t * histogram[t];
+            const meanB = sumB / countB;
+            const meanF = (sum - sumB) / countF;
+            const variance = countB * countF * Math.pow(meanB - meanF, 2);
+            
+            if (variance > maxVar) {
+                maxVar = variance;
+                threshold = t;
+            }
+        }
+        
+        // Binarização com threshold de Otsu
         const binary = new Uint8Array(width * height);
         for (let i = 0; i < gray.length; i++) {
             binary[i] = gray[i] < threshold ? 1 : 0;
         }
         
         // Parâmetros de posição ajustados para cartão A4
-        const startX = width * 0.20;
-        const startY = height * 0.25;
-        const stepX = width * 0.14;
-        const stepY = height * 0.062;
-        const raio = 20;
+        const startX = width * 0.18;  // Um pouco mais à esquerda
+        const startY = height * 0.30; // Mais para baixo
+        const stepX = width * 0.16;   // Espaçamento maior
+        const stepY = height * 0.065; // Espaçamento vertical ajustado
+        const raio = 25; // Raio ligeiramente maior
         
         const questoesLidas = {};
         
@@ -598,10 +622,15 @@
                 let pixelsEscuros = 0;
                 let totalPixels = 0;
                 
+                // Calcular densidade apenas dentro do círculo
                 for (let dy = -raio; dy <= raio; dy++) {
                     for (let dx = -raio; dx <= raio; dx++) {
+                        // Verificar se está dentro do círculo
+                        if (dx*dx + dy*dy > raio*raio) continue;
+                        
                         const x = Math.floor(cx + dx);
                         const y = Math.floor(cy + dy);
+                        
                         if (x >= 0 && x < width && y >= 0 && y < height) {
                             totalPixels++;
                             if (binary[y * width + x] === 1) {
@@ -610,15 +639,20 @@
                         }
                     }
                 }
+                
                 const densidade = totalPixels > 0 ? (pixelsEscuros / totalPixels) * 100 : 0;
+                
                 if (densidade > maiorDensidade) {
                     maiorDensidade = densidade;
                     melhorAlt = ALTERNATIVAS[altIdx];
                 }
             }
-            // Limiar de 22% para considerar preenchido
-            questoesLidas[q] = maiorDensidade > 22 ? melhorAlt : null;
+            
+            // Limiar dinâmico baseado na densidade máxima encontrada
+            // Se nenhuma alternativa tem mais de 35%, considera não marcado
+            questoesLidas[q] = maiorDensidade > 35 ? melhorAlt : null;
         }
+        
         return questoesLidas;
     }
     
@@ -784,7 +818,8 @@
     gerarFormularioGabarito();
     carregarGabarito();
     
-    console.log('Sistema de leitura de gabarito inicializado com sucesso!');
+    console.log('✅ Sistema de leitura de gabarito inicializado com sucesso!');
 </script>
 </body>
 </html>
+```
